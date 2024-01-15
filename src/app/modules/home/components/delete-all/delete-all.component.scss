@@ -1,0 +1,18 @@
+@import "../../../../../dist/scss/variables.scss";
+
+button {
+  color: #ffffff;
+  background: $delete-color;
+  height: 41px;
+  border-radius: 8px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto 25px auto;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($delete-color, 10%);
+  }
+}
