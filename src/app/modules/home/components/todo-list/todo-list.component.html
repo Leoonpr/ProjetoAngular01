@@ -1,8 +1,8 @@
 <div class="inputbox">
   <ul>
-    <li>
-      <input type="checkbox" />
-      <input type="text" class="checked" />
+    <li *ngFor="let item of taskList">
+      <input type="checkbox" [(ngModel)]="item.checked" />
+      <input type="text" class="checked" [(ngModel)]="item.task" />
       <button>
         <img
           src="../../../../../assets/svg/trash-icon.svg"
@@ -14,4 +14,4 @@
 </div>
 
 <app-add-itens></app-add-itens>
-<app-delete-all></app-delete-all>
+<app-delete-all (click)="deleteAll()"></app-delete-all>
