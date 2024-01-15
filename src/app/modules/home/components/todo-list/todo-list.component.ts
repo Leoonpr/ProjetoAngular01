@@ -16,6 +16,10 @@ export class TodoListComponent {
     this.taskList.splice(event, 1);
   }
 
+  public setEmit(event: string) {
+    this.taskList.push({ task: event, checked: false });
+  }
+
   public deleteAll() {
     this.taskList = [];
   }

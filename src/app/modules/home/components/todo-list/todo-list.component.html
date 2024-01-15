@@ -1,9 +1,9 @@
 <div class="inputbox">
   <ul>
-    <li *ngFor="let item of taskList">
+    <li *ngFor="let item of taskList; let i = index">
       <input type="checkbox" [(ngModel)]="item.checked" />
       <input type="text" class="checked" [(ngModel)]="item.task" />
-      <button>
+      <button (click)="deleteItemTaskList(i)">
         <img
           src="../../../../../assets/svg/trash-icon.svg"
           alt="icone de lixeira"
@@ -13,5 +13,5 @@
   </ul>
 </div>
 
-<app-add-itens></app-add-itens>
+<app-add-itens (emitItem)="setEmit($event)"></app-add-itens>
 <app-delete-all (click)="deleteAll()"></app-delete-all>
