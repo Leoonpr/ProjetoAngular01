@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { TaskList } from '../../model/task-list';
 
 @Component({
@@ -6,11 +6,13 @@ import { TaskList } from '../../model/task-list';
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
 })
-export class TodoListComponent {
-  public taskList: Array<TaskList> = [
-    { task: 'First', checked: true },
-    { task: 'Second', checked: false },
-  ];
+export class TodoListComponent implements DoCheck {
+  public taskList: Array<TaskList> = JSON.parse(
+    localStorage.getItem('item') || '[]'
+  );
+  ngDoCheck() {
+    this.setLocalStorage();
+  }
 
   public deleteItemTaskList(event: number) {
     this.taskList.splice(event, 1);
@@ -22,5 +24,14 @@ export class TodoListComponent {
 
   public deleteAll() {
     this.taskList = [];
+  }
+
+  public setLocalStorage() {
+    if (this.taskList) {
+      this.taskList.sort(
+        (first, last) => Number(first.checked) - Number(last.checked)
+      );
+      localStorage.setItem('item', JSON.stringify(this.taskList));
+    }
   }
 }
